@@ -1,6 +1,7 @@
 //var mongodb = require("mongodb");
 var mongoose = require("mongoose");
 var path = require('path');
+var controller = require("./src/controller");
 var express = require("express");
 var app = express();
 
@@ -15,7 +16,6 @@ app.get("/", (req, res) => {
     //res.render("index.html")
 });
 
-var controller = require("./src/controller");
 controller(app);
 
 
