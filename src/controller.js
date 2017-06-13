@@ -1,12 +1,18 @@
 var Links = require("../models/url.js");
 var IdCounter = require("../models/id-counter.js");
 var rule = require("./code");
+var patternUrl = /^https?:\/\/.*\..*/i;
 
 module.exports = function(app) {
-    //Shortening a new url
+    // Shortening a new url
     app.get(/^\/create\/(.+)/, (req, res) => {
         var url = req.params[0];
-        //Get the current index of the links in DB
+        // Check if it is a valid URL
+        if (!patternUrl.test(url)) {
+            res.send("invalidUrl");
+            return;
+        }
+        // Get the current index of the links in DB
         IdCounter.find({ name: "counter" }, (err, counter) => {
           if(err) throw err;
           else {
@@ -34,10 +40,11 @@ module.exports = function(app) {
             }
             if (link.length > 0) {
                 //res.send("The URL is: " + link[0].url);
-                res.redirect(link[0].url)
+                res.render("redirect", {url: link[0].url});
+                //res.redirect(link[0].url);
             }
             //else res.send("Please check your URL!");
             else res.redirect("/");
         });
     });
-}
+};

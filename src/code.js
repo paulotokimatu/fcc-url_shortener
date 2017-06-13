@@ -1,16 +1,15 @@
 var rule = {};
-var alphabet = "123456789abcdefghijkmnopqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ";
+var alphabet = "rWYsZzeU2G5nuh4MLcN3gS6Ha91ifyDTkF7wBRxJjqPv8dVCpoQXmtEbKA";
 var base = alphabet.length;
 
 rule.encode = function(number) {
     var coded = "";
-    var rem = "";
     while (number > 0) {
       	coded = alphabet.charAt(number % base) + coded;
         number = Math.floor(number / base);
     }
     return coded;
-}
+};
 
 rule.decode = function(coded) {
     var decoded = 0;
@@ -21,6 +20,6 @@ rule.decode = function(coded) {
         coded = coded.substring(1);
     }
     return decoded;
-}
+};
 
 module.exports = rule;
