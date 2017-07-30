@@ -6,7 +6,7 @@ var express = require("express");
 var app = express();
 
 mongoose.Promise = Promise;
-mongoose.connect("mongodb://tokimatu:short-url@ds113000.mlab.com:13000/tokimatu_short-url");
+mongoose.connect(process.env.DB);
 
 app.set("view engine", "ejs");
 app.use(express.static("public"));
